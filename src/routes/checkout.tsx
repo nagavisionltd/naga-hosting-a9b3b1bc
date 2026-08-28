@@ -15,13 +15,13 @@ export const Route = createFileRoute("/checkout")({
   validateSearch: searchSchema,
   head: () => ({
     meta: [
-      { title: "Checkout — Halcyon Hosting" },
+      { title: "Checkout — Naga Host Hosting" },
       {
         name: "description",
         content:
-          "Complete your Halcyon hosting order. Pick a package, pay securely, and receive your full cPanel account login by email.",
+          "Complete your Naga Host hosting order. Pick a package, pay securely, and receive your full cPanel account login by email.",
       },
-      { property: "og:title", content: "Checkout — Halcyon Hosting" },
+      { property: "og:title", content: "Checkout — Naga Host Hosting" },
       {
         property: "og:description",
         content: "Pay securely and receive your full cPanel account login by email.",
@@ -39,7 +39,7 @@ function Checkout() {
   const { plan: planId } = Route.useSearch();
   const navigate = Route.useNavigate();
   const [step, setStep] = useState(0);
-  const [annual, setAnnual] = useState(true);
+  const [annual, setAnnual] = useState(false);
   const plan = getPlan(planId);
   const price = annual ? plan.annual : plan.monthly;
 
@@ -49,7 +49,7 @@ function Checkout() {
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
           <Link to="/" className="flex items-center gap-2.5">
             <span className="bg-spectrum h-7 w-7 rounded-lg" />
-            <span className="font-display text-lg font-bold">Halcyon</span>
+            <span className="font-display text-lg font-bold">Naga Host</span>
           </Link>
           <span className="inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground">
             <Lock className="h-3.5 w-3.5" /> Secure checkout
@@ -145,7 +145,10 @@ function Checkout() {
                       ["Nameservers", "ns1.halcyon.host / ns2.halcyon.host"],
                       ["FTP + SSH", "enabled"],
                     ].map(([k, v]) => (
-                      <div key={k} className="flex flex-wrap justify-between gap-2 border-b border-border/60 pb-2">
+                      <div
+                        key={k}
+                        className="flex flex-wrap justify-between gap-2 border-b border-border/60 pb-2"
+                      >
                         <dt className="text-muted-foreground">{k}</dt>
                         <dd className="font-semibold">{v}</dd>
                       </div>

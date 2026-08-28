@@ -9,7 +9,6 @@ import {
   Lock,
   MoveRight,
   ShieldCheck,
-  Star,
   Zap,
 } from "lucide-react";
 import {
@@ -28,13 +27,13 @@ import fibre from "@/assets/fibre.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Halcyon Hosting — Fast cPanel Hosting, Live in 60 Seconds" },
+      { title: "Naga Host Hosting — Fast cPanel Hosting, Live in 60 Seconds" },
       {
         name: "description",
         content:
           "Premium NVMe cPanel hosting for studios and stores. Free migration, daily backups, 24/7 humans. Pay once and your full cPanel login lands in your inbox.",
       },
-      { property: "og:title", content: "Halcyon Hosting — Fast cPanel Hosting" },
+      { property: "og:title", content: "Naga Host Hosting — Fast cPanel Hosting" },
       {
         property: "og:description",
         content:
@@ -64,7 +63,7 @@ function Nav() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
         <a href="#top" className="flex items-center gap-2.5">
           <span className="bg-spectrum h-7 w-7 rounded-lg" />
-          <span className="font-display text-lg font-bold tracking-tight">Halcyon</span>
+          <span className="font-display text-lg font-bold tracking-tight">Naga Host</span>
         </a>
         <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
           <a href="#plans" className="transition-colors hover:text-foreground">
@@ -75,6 +74,9 @@ function Nav() {
           </a>
           <a href="#handover" className="transition-colors hover:text-foreground">
             How it works
+          </a>
+          <a href="#reality-sprint" className="transition-colors hover:text-foreground">
+            Reality Sprint
           </a>
           <a href="#faq" className="transition-colors hover:text-foreground">
             FAQ
@@ -100,24 +102,47 @@ function Hero() {
         className="bg-spectrum pointer-events-none absolute -top-40 left-1/2 h-[38rem] w-[70rem] -translate-x-1/2 rounded-full opacity-[0.18] blur-[120px]"
       />
       <div className="relative mx-auto max-w-7xl px-5 pt-16 pb-10 sm:px-8 sm:pt-24">
-        <Reveal className="max-w-4xl">
+        <div
+          aria-hidden
+          className="hero-vector pointer-events-none absolute inset-0 overflow-hidden"
+        >
+          <svg
+            viewBox="0 0 900 520"
+            className="h-full w-full"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              className="hero-path"
+              d="M410 440C490 370 420 280 520 230C620 180 700 250 790 110"
+            />
+            <path
+              className="hero-path hero-path-secondary"
+              d="M500 490C585 410 520 330 630 270C720 220 790 250 860 170"
+            />
+            <circle className="hero-orbit" cx="600" cy="245" r="118" />
+            <circle className="hero-node hero-node-one" cx="520" cy="230" r="8" />
+            <circle className="hero-node hero-node-two" cx="790" cy="110" r="6" />
+            <circle className="hero-node hero-node-three" cx="630" cy="270" r="5" />
+          </svg>
+        </div>
+        <Reveal className="relative z-10 max-w-4xl">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-[0.18em] text-muted-foreground uppercase">
             <Zap className="h-3.5 w-3.5 text-flame" /> UK NVMe · LiteSpeed · cPanel
           </span>
           <h1 className="mt-7 text-[clamp(2.75rem,8vw,6.5rem)] leading-[0.92] font-extrabold">
-            Hosting that
+            Hosting built for
             <br />
-            behaves like
+            <span className="text-spectrum">founders, creators</span>
             <br />
-            <span className="text-spectrum">infrastructure.</span>
+            &amp; businesses.
           </h1>
         </Reveal>
         <div className="mt-10 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
           <Reveal delay={120}>
             <p className="max-w-lg text-lg leading-relaxed text-muted-foreground sm:text-xl">
-              No dashboards you have to decode. No queue for support. Choose a package, pay, and
-              your <strong className="font-semibold text-foreground">full cPanel login</strong>{" "}
-              arrives in under a minute — root of your own house, keys included.
+              Choose your plan, pay securely, and get full cPanel access by email. You control your
+              files, your data, and your self-hosted WordPress site.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
@@ -125,7 +150,7 @@ function Hero() {
                 search={{ plan: "studio" }}
                 className="bg-spectrum group inline-flex items-center gap-2.5 rounded-full px-8 py-4 text-base font-semibold text-flame-foreground shadow-float transition-transform hover:scale-[1.02]"
               >
-                Start hosting
+                Choose your plan
                 <MoveRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
               <a
@@ -149,20 +174,22 @@ function Hero() {
             </dl>
           </Reveal>
           <Reveal delay={220} className="relative">
-            <div className="relative overflow-hidden rounded-[2rem] bg-sand shadow-float">
+            <div className="hero-image group relative overflow-hidden rounded-[2rem] bg-sand shadow-float">
               <img
                 src={heroSlab}
                 alt="Illuminated NVMe server slab floating in a bright studio"
                 width={1600}
                 height={1200}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.035]"
               />
             </div>
             <div className="floaty absolute -bottom-6 -left-4 flex items-center gap-3 rounded-2xl border border-border bg-card/90 px-5 py-4 shadow-lift backdrop-blur-md sm:-left-10">
               <KeyRound className="h-5 w-5 text-flame" />
               <div>
                 <p className="text-sm font-semibold">cPanel credentials sent</p>
-                <p className="text-xs text-muted-foreground">studio-ledger.co.uk · 41s ago</p>
+                <p className="text-xs text-muted-foreground">
+                  Account ready · credentials by email
+                </p>
               </div>
             </div>
           </Reveal>
@@ -193,24 +220,24 @@ function Marquee() {
 function Benefits() {
   const items = [
     {
-      icon: Gauge,
-      title: "Built for speed you can feel",
-      body: "NVMe arrays, LiteSpeed, and per-site object caching. Pages that used to crawl land in the first paint budget.",
-    },
-    {
-      icon: ShieldCheck,
-      title: "Protected without a plugin bill",
-      body: "WAF, brute-force shielding, malware sweeps and free SSL are baked in — not sold back to you at renewal.",
-    },
-    {
-      icon: LifeBuoy,
-      title: "Humans, day or night",
-      body: "Average first reply: 3 minutes. Real engineers who will open your cPanel with you, not a script.",
+      icon: KeyRound,
+      title: "Full cPanel access",
+      body: "Manage your hosting account, domains, email, databases, files, and backups from one familiar control panel.",
     },
     {
       icon: Lock,
-      title: "You own the keys",
-      body: "Full cPanel, WHM-grade access on Foundry, SSH, cron, phpMyAdmin. Leave whenever you like — we'll help you pack.",
+      title: "Your files and data",
+      body: "Your site stays under your control. Use File Manager, FTP, SSH, cron, and phpMyAdmin where your plan supports them.",
+    },
+    {
+      icon: Zap,
+      title: "One-click installs",
+      body: "Install WordPress and other supported applications without building the setup from scratch.",
+    },
+    {
+      icon: ShieldCheck,
+      title: "Email, backups, and SSL",
+      body: "Professional email allowances, automated backups, and SSL are included according to the package you choose.",
     },
   ];
   return (
@@ -261,8 +288,8 @@ function Editorial() {
           </h2>
           <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground">
             Your origin sits on UK metal with redundant 10 Gbit uplinks. Static assets fan out to
-            the edge automatically, so a visitor in Leeds and a visitor in Lisbon get the same
-            first byte.
+            the edge automatically, so a visitor in Leeds and a visitor in Lisbon get the same first
+            byte.
           </p>
           <ul className="mt-8 space-y-3">
             {[
@@ -283,7 +310,7 @@ function Editorial() {
 }
 
 function Pricing() {
-  const [annual, setAnnual] = useState(true);
+  const [annual, setAnnual] = useState(false);
   return (
     <section id="plans" className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
       <Reveal className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
@@ -383,7 +410,7 @@ function Pricing() {
 
 function Compare() {
   const rows: [string, string, string][] = [
-    ["Full cPanel account included", "Halcyon", "Budget hosts"],
+    ["Full cPanel account included", "Naga Host", "Budget hosts"],
     ["Storage medium", "NVMe, no throttling", "Shared SATA, capped IOPS"],
     ["Migration", "Free, overnight, done for you", "£70 or DIY"],
     ["Backups", "Daily → hourly, self-restore", "Weekly, paid restore"],
@@ -402,7 +429,7 @@ function Compare() {
         <Reveal delay={100} className="mt-12 overflow-hidden rounded-[1.75rem] bg-card shadow-lift">
           <div className="grid grid-cols-[1.4fr_1fr_1fr] gap-4 border-b border-border px-6 py-4 text-[0.7rem] font-bold tracking-[0.14em] uppercase sm:px-9">
             <span className="text-muted-foreground"> </span>
-            <span className="text-spectrum">Halcyon</span>
+            <span className="text-spectrum">Naga Host</span>
             <span className="text-muted-foreground">Typical host</span>
           </div>
           {rows.map(([label, ours, theirs]) => (
@@ -486,46 +513,137 @@ function Handover() {
   );
 }
 
-function Proof() {
-  const quotes = [
+function RealitySprint() {
+  const offers = [
     {
-      q: "We moved 22 client sites in one night and nobody noticed — except the Core Web Vitals graph.",
-      n: "Priya Raman",
-      r: "Founder, Studio Oakley",
+      label: "01 · The Reality Sprint",
+      title: "Define reality.",
+      price: "30 days / £5,000",
+      body: "Strategic clarity, creative direction, and technology for founders who need an idea turned into something people can see, touch and believe in.",
+      items: [
+        "Strategy session",
+        "Creative & brand direction",
+        "Commercial & funding strategy",
+        "Working website, MVP or AI prototype",
+      ],
     },
     {
-      q: "The cPanel login was in my inbox before I'd finished making coffee. That set the tone.",
-      n: "Tom Bewley",
-      r: "Owner, Bewley Cycles",
+      label: "02 · The Launchpad",
+      title: "Idea → market ready.",
+      price: "£5,000–£10,000+",
+      body: "For founders moving from a promising idea to an investor-ready or market-ready proposition.",
+      items: [
+        "Full brand identity",
+        "Working MVP or prototype",
+        "Investor narrative & pitch deck",
+        "Go-to-market strategy",
+      ],
     },
     {
-      q: "Support answered at 2am on a Sunday with an actual fix. I've stopped shopping around.",
-      n: "Marta Kovač",
-      r: "CTO, Parquet",
+      label: "03 · Creative & Commercial Retainer",
+      title: "Your external innovation department.",
+      price: "£1,500–£5,000/mo",
+      body: "Ongoing strategic leadership across creative direction, commercial strategy, funding, and technology.",
+      items: [
+        "Curtis · Creative / product",
+        "Dr Jack · Commercial / funding",
+        "NagaVision · Tech / AI",
+        "Ongoing strategic leadership",
+      ],
     },
+  ];
+
+  return (
+    <section id="reality-sprint" className="bg-foreground py-24 text-background sm:py-32">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <Reveal className="max-w-3xl">
+          <p className="text-xs font-semibold tracking-[0.24em] text-background/60 uppercase">
+            More than hosting
+          </p>
+          <h2 className="mt-5 text-[clamp(2.25rem,5vw,4.5rem)] leading-[0.98] font-bold">
+            When your site needs a next version, <span className="text-spectrum">build it.</span>
+          </h2>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-background/70">
+            Naga Host keeps your website and data under your control. When the next move is bigger
+            than hosting, NagaVision’s Reality Sprint turns the idea into a working website, MVP, AI
+            prototype, or launch plan.
+          </p>
+        </Reveal>
+        <div className="mt-14 grid gap-5 lg:grid-cols-3">
+          {offers.map((offer, i) => (
+            <Reveal key={offer.label} delay={i * 90}>
+              <article className="flex h-full flex-col rounded-[1.75rem] border border-background/15 bg-background/5 p-7 transition-all hover:-translate-y-1 hover:bg-background/10 sm:p-8">
+                <p className="text-xs font-semibold tracking-[0.18em] text-flame uppercase">
+                  {offer.label}
+                </p>
+                <h3 className="mt-6 text-2xl font-bold">{offer.title}</h3>
+                <p className="mt-3 font-display text-lg text-background/90">{offer.price}</p>
+                <p className="mt-5 text-sm leading-relaxed text-background/65">{offer.body}</p>
+                <ul className="mt-7 flex-1 space-y-3 text-sm text-background/80">
+                  {offer.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-flame" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+        <Reveal
+          delay={180}
+          className="mt-10 flex flex-col items-start justify-between gap-5 border-t border-background/15 pt-7 sm:flex-row sm:items-center"
+        >
+          <p className="max-w-xl text-sm leading-relaxed text-background/65">
+            Start with the hosting. If the next move is bigger than infrastructure, book the Reality
+            Sprint directly with the NagaVision team.
+          </p>
+          <a
+            href="https://reality-sprint.lovable.app/"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-semibold text-flame-foreground transition-transform hover:scale-[1.02]"
+          >
+            Explore Reality Sprint <ArrowRight className="h-4 w-4" />
+          </a>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function Inclusions() {
+  const items = [
+    ["Your files and data", "Full access to your own hosting account and site files."],
+    ["Self-hosted WordPress", "Install and manage WordPress yourself through cPanel."],
+    [
+      "One-click installs",
+      "Install WordPress and other supported applications without manual setup.",
+    ],
+    [
+      "NagaVision tools",
+      "Customers get access to upcoming NagaVision AI tools and web apps at no extra charge.",
+    ],
   ];
   return (
     <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-8 sm:pb-32">
-      <Reveal className="flex items-center gap-3">
-        <div className="flex gap-0.5">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Star key={i} className="h-4 w-4 fill-flame text-flame" />
-          ))}
-        </div>
-        <p className="text-sm font-semibold text-muted-foreground">
-          4.9 / 5 from 2,140 UK customers
+      <Reveal>
+        <p className="text-xs font-semibold tracking-[0.24em] text-muted-foreground uppercase">
+          Included by design
         </p>
+        <h2 className="mt-5 max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.03] font-bold">
+          Simple hosting. <span className="text-spectrum">Full control.</span>
+        </h2>
       </Reveal>
-      <div className="mt-10 grid gap-6 md:grid-cols-3">
-        {quotes.map((c, i) => (
-          <Reveal key={c.n} delay={i * 90}>
-            <blockquote className="flex h-full flex-col justify-between rounded-[1.75rem] border border-border bg-card p-8">
-              <p className="font-display text-xl leading-snug font-semibold">“{c.q}”</p>
-              <footer className="mt-8">
-                <p className="text-sm font-bold">{c.n}</p>
-                <p className="text-sm text-muted-foreground">{c.r}</p>
-              </footer>
-            </blockquote>
+      <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {items.map(([title, body], i) => (
+          <Reveal key={title} delay={i * 90}>
+            <article className="h-full rounded-[1.75rem] border border-border bg-card p-8">
+              <Check className="h-6 w-6 text-flame" />
+              <h3 className="mt-6 text-xl font-bold">{title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{body}</p>
+            </article>
           </Reveal>
         ))}
       </div>
@@ -558,6 +676,10 @@ function Faq() {
     [
       "Can I upgrade later?",
       "Any time, from inside your account. Upgrades are instant and pro-rated; nothing is re-provisioned or moved.",
+    ],
+    [
+      "What do hosting customers get from NagaVision?",
+      "Customers get access to upcoming NagaVision AI tools and web apps at no extra charge. We will announce each tool as it becomes available.",
     ],
   ];
   return (
@@ -625,10 +747,10 @@ function Footer() {
       <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-5 py-10 sm:px-8 md:flex-row md:items-center">
         <div className="flex items-center gap-2.5">
           <span className="bg-spectrum h-6 w-6 rounded-md" />
-          <span className="font-display font-bold">Halcyon Hosting</span>
+          <span className="font-display font-bold">Naga Host Hosting</span>
         </div>
         <p className="text-sm text-muted-foreground">
-          © {new Date().getFullYear()} Halcyon Hosting Ltd · Registered in England
+          © {new Date().getFullYear()} Naga Host Hosting Ltd · Registered in England
         </p>
       </div>
     </footer>
@@ -646,7 +768,8 @@ function Landing() {
         <Pricing />
         <Compare />
         <Handover />
-        <Proof />
+        <RealitySprint />
+        <Inclusions />
         <Faq />
         <FinalCta />
       </main>
