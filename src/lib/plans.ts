@@ -70,4 +70,5 @@ export const PLANS: Plan[] = [
   },
 ];
 
-export const getPlan = (id?: string | null) => PLANS.find((p) => p.id === id) ?? PLANS[1];
+export const getPlan = (id?: string | null): Plan =>
+  PLANS.find((p) => p.id === id) ?? (PLANS[1] as Plan);

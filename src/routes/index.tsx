@@ -534,7 +534,7 @@ function Proof() {
 }
 
 function Faq() {
-  const faqs = [
+  const faqs: [string, string][] = [
     [
       "Do I really get a full cPanel account?",
       "Yes. Once payment clears we create a dedicated cPanel account on your allocated server and email you the cPanel URL, username and a one-time password. File Manager, phpMyAdmin, email, cron, SSH and Softaculous are all enabled.",
