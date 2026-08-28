@@ -358,3 +358,88 @@
     display: none;
   }
 }
+
+/* Handbook banner: a centred, low-weight promotional moment with no external runtime. */
+.handbook-banner {
+  isolation: isolate;
+}
+.handbook-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+}
+.handbook-glow {
+  animation: handbook-breathe 5s ease-in-out infinite;
+}
+.handbook-banner a {
+  box-shadow: 0 0 0 0 color-mix(in oklch, var(--spectrum) 45%, transparent);
+  transition:
+    transform 180ms cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 180ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.handbook-banner a:hover {
+  box-shadow: 0 0 0 8px color-mix(in oklch, var(--spectrum) 15%, transparent);
+}
+@keyframes handbook-breathe {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0.22;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.12);
+    opacity: 0.4;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .handbook-glow {
+    animation: none;
+  }
+}
+
+/* NagaVision Hosting visual system: the canvas adds depth without becoming the page. */
+.signal-canvas-wrap {
+  pointer-events: auto;
+  position: relative;
+  min-height: 20rem;
+}
+.signal-canvas-hero {
+  position: absolute;
+  z-index: 1;
+  top: 4rem;
+  right: -2rem;
+  width: min(54vw, 42rem);
+  height: 32rem;
+  opacity: 0.72;
+  mix-blend-mode: multiply;
+}
+.signal-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 1023px) {
+  .signal-canvas-hero {
+    top: 9rem;
+    right: -8rem;
+    width: 56vw;
+    height: 28rem;
+    opacity: 0.45;
+  }
+}
+@media (max-width: 767px) {
+  .signal-canvas-hero {
+    top: 7rem;
+    right: -10rem;
+    width: 88vw;
+    height: 22rem;
+    opacity: 0.3;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .signal-canvas-hero {
+    opacity: 0.12;
+  }
+}

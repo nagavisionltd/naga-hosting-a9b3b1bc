@@ -3,6 +3,7 @@ import { useState } from "react";
 import {
   ArrowRight,
   Check,
+  Download,
   Gauge,
   KeyRound,
   LifeBuoy,
@@ -10,6 +11,7 @@ import {
   MoveRight,
   ShieldCheck,
   Zap,
+  Sparkles,
 } from "lucide-react";
 import {
   Accordion,
@@ -18,11 +20,14 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Reveal } from "@/components/site/Reveal";
+import { SignalCanvas } from "@/components/site/SignalCanvas";
 import { PLANS } from "@/lib/plans";
 import { cn } from "@/lib/utils";
 import heroSlab from "@/assets/hero-slab.jpg";
 import ribbon from "@/assets/ribbon.jpg";
 import fibre from "@/assets/fibre.jpg";
+
+const HANDBOOK_URL = "/Orchestrating_Digital_Worlds.pdf";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -63,7 +68,7 @@ function Nav() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
         <a href="#top" className="flex items-center gap-2.5">
           <span className="bg-spectrum h-7 w-7 rounded-lg" />
-          <span className="font-display text-lg font-bold tracking-tight">Naga Host</span>
+          <span className="font-display text-lg font-bold tracking-tight">NagaVision Hosting</span>
         </a>
         <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
           <a href="#plans" className="transition-colors hover:text-foreground">
@@ -126,10 +131,8 @@ function Hero() {
             <circle className="hero-node hero-node-three" cx="630" cy="270" r="5" />
           </svg>
         </div>
+        <SignalCanvas className="signal-canvas-hero" />
         <Reveal className="relative z-10 max-w-4xl">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-[0.18em] text-muted-foreground uppercase">
-            <Zap className="h-3.5 w-3.5 text-flame" /> UK NVMe · LiteSpeed · cPanel
-          </span>
           <h1 className="mt-7 text-[clamp(2.75rem,8vw,6.5rem)] leading-[0.92] font-extrabold">
             Hosting built for
             <br />
@@ -200,6 +203,48 @@ function Hero() {
   );
 }
 
+function HandbookBanner() {
+  return (
+    <section className="px-5 pb-16 sm:px-8 sm:pb-24">
+      <Reveal>
+        <div className="handbook-banner relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-foreground px-6 py-12 text-center text-background shadow-float sm:px-12 sm:py-16">
+          <div
+            aria-hidden
+            className="handbook-grid pointer-events-none absolute inset-0 opacity-40"
+          />
+          <div
+            aria-hidden
+            className="handbook-glow pointer-events-none absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-spectrum opacity-30 blur-3xl"
+          />
+          <div className="relative z-10 mx-auto max-w-3xl">
+            <p className="text-xs font-semibold tracking-[0.28em] text-background/60 uppercase">
+              Free handbook
+            </p>
+            <h2 className="mt-5 text-[clamp(2.25rem,6vw,4.75rem)] leading-[0.96] font-extrabold">
+              The Vibecoders Handbook
+            </h2>
+            <p className="mt-4 text-xl font-semibold text-spectrum sm:text-2xl">
+              Orchestrating Digital Worlds
+            </p>
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-background/70 sm:text-lg">
+              A practical guide to turning ideas, tools, and AI into digital experiences people can
+              use.
+            </p>
+            <a
+              href={HANDBOOK_URL}
+              download="The_Vibecoders_Handbook_Orchestrating_Digital_Worlds.pdf"
+              className="mt-8 inline-flex items-center gap-2.5 rounded-full bg-background px-6 py-3.5 text-sm font-bold text-foreground transition-transform hover:scale-[1.03] active:scale-[0.98]"
+            >
+              Download the free PDF
+              <Download className="h-4 w-4" />
+            </a>
+          </div>
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
 function Marquee() {
   return (
     <div className="mt-14 overflow-hidden border-y border-border/60 py-6">
@@ -239,6 +284,11 @@ function Benefits() {
       title: "Email, backups, and SSL",
       body: "Professional email allowances, automated backups, and SSL are included according to the package you choose.",
     },
+    {
+      icon: Sparkles,
+      title: "NagaVision tools",
+      body: "Hosting customers get access to upcoming NagaVision AI tools and web apps at no extra charge.",
+    },
   ];
   return (
     <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
@@ -247,6 +297,9 @@ function Benefits() {
           Everything the cheap hosts charge extra for,{" "}
           <span className="text-spectrum">standard.</span>
         </h2>
+        <p className="mt-5 text-lg font-semibold text-muted-foreground sm:text-xl">
+          Simple hosting. <span className="text-foreground">Full control.</span>
+        </p>
       </Reveal>
       <div className="mt-14 grid gap-6 md:grid-cols-2">
         {items.map((it, i) => (
@@ -263,46 +316,60 @@ function Benefits() {
   );
 }
 
-function Editorial() {
+function Infrastructure() {
+  const rows: [string, string, string][] = [
+    ["Full cPanel account", "Included", "Often restricted"],
+    ["Storage", "NVMe", "Shared / capped"],
+    ["Migration", "Included", "DIY or extra fee"],
+    ["Backups", "Daily → hourly", "Weekly / paid restore"],
+    ["SSL", "Included and renewed", "May renew separately"],
+    ["Renewal", "Same price", "Intro rate may rise"],
+  ];
   return (
-    <section className="bg-sand py-24 sm:py-32">
-      <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-2">
-        <Reveal>
-          <figure className="overflow-hidden rounded-[2rem] shadow-float">
-            <img
-              src={fibre}
-              alt="Fibre optic strands glowing in coral and blue"
-              loading="lazy"
-              width={1408}
-              height={1008}
-              className="h-full w-full object-cover"
-            />
-          </figure>
-        </Reveal>
-        <Reveal delay={120}>
+    <section id="compare" className="bg-sand py-24 sm:py-32">
+      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <Reveal className="mx-auto max-w-4xl text-center">
           <p className="text-xs font-semibold tracking-[0.24em] text-muted-foreground uppercase">
-            The network
+            The infrastructure behind your site
           </p>
-          <h2 className="mt-5 text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.03] font-bold">
-            London, Manchester, and 34 edge cities in between.
+          <h2 className="mt-5 text-[clamp(2.3rem,6vw,5rem)] leading-[0.98] font-extrabold">
+            London, Manchester, and <span className="text-spectrum">34 edge cities</span> in
+            between.
           </h2>
-          <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground">
-            Your origin sits on UK metal with redundant 10 Gbit uplinks. Static assets fan out to
-            the edge automatically, so a visitor in Leeds and a visitor in Lisbon get the same first
-            byte.
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
+            UK NVMe hosting with full cPanel access, practical migration help, and the tools to keep
+            control of your files, data, and WordPress site.
           </p>
-          <ul className="mt-8 space-y-3">
-            {[
-              "Free white-glove migration, done overnight",
-              "Automatic PHP + WordPress core patching",
-              "Isolated accounts — one bad neighbour can't touch you",
-            ].map((f) => (
-              <li key={f} className="flex items-start gap-3 text-foreground">
-                <Check className="mt-1 h-4 w-4 shrink-0 text-flame" />
-                <span>{f}</span>
-              </li>
+          <div className="mt-8 flex flex-wrap justify-center gap-3 text-sm font-semibold text-foreground">
+            {["UK NVMe", "10 Gbit uplinks", "Full cPanel", "Free migration"].map((item) => (
+              <span
+                key={item}
+                className="rounded-full border border-border bg-background px-4 py-2"
+              >
+                {item}
+              </span>
             ))}
-          </ul>
+          </div>
+        </Reveal>
+        <Reveal
+          delay={120}
+          className="mx-auto mt-14 max-w-5xl overflow-hidden rounded-[2rem] bg-card shadow-float"
+        >
+          <div className="grid grid-cols-[1.35fr_1fr_1fr] gap-4 border-b border-border px-5 py-4 text-[0.68rem] font-bold tracking-[0.14em] uppercase sm:px-8">
+            <span className="text-muted-foreground">What you get</span>
+            <span className="text-spectrum">Naga Host</span>
+            <span className="text-muted-foreground">Typical host</span>
+          </div>
+          {rows.map(([label, ours, theirs]) => (
+            <div
+              key={label}
+              className="grid grid-cols-[1.35fr_1fr_1fr] items-start gap-4 border-b border-border/60 px-5 py-4 text-sm last:border-0 sm:px-8"
+            >
+              <span className="font-semibold">{label}</span>
+              <span>{ours}</span>
+              <span className="text-muted-foreground">{theirs}</span>
+            </div>
+          ))}
         </Reveal>
       </div>
     </section>
@@ -403,46 +470,6 @@ function Pricing() {
             </article>
           </Reveal>
         ))}
-      </div>
-    </section>
-  );
-}
-
-function Compare() {
-  const rows: [string, string, string][] = [
-    ["Full cPanel account included", "Naga Host", "Budget hosts"],
-    ["Storage medium", "NVMe, no throttling", "Shared SATA, capped IOPS"],
-    ["Migration", "Free, overnight, done for you", "£70 or DIY"],
-    ["Backups", "Daily → hourly, self-restore", "Weekly, paid restore"],
-    ["SSL", "Free forever, auto-renewed", "Free year one, then billed"],
-    ["Support", "Engineers in ~3 minutes", "Tier-1 chat script"],
-    ["Renewal price", "Same as day one", "2–4× introductory rate"],
-  ];
-  return (
-    <section id="compare" className="bg-sand py-24 sm:py-32">
-      <div className="mx-auto max-w-5xl px-5 sm:px-8">
-        <Reveal>
-          <h2 className="max-w-2xl text-[clamp(2rem,5vw,3.5rem)] leading-[1.02] font-bold">
-            The difference shows up on the invoice.
-          </h2>
-        </Reveal>
-        <Reveal delay={100} className="mt-12 overflow-hidden rounded-[1.75rem] bg-card shadow-lift">
-          <div className="grid grid-cols-[1.4fr_1fr_1fr] gap-4 border-b border-border px-6 py-4 text-[0.7rem] font-bold tracking-[0.14em] uppercase sm:px-9">
-            <span className="text-muted-foreground"> </span>
-            <span className="text-spectrum">Naga Host</span>
-            <span className="text-muted-foreground">Typical host</span>
-          </div>
-          {rows.map(([label, ours, theirs]) => (
-            <div
-              key={label}
-              className="grid grid-cols-[1.4fr_1fr_1fr] items-start gap-4 border-b border-border/60 px-6 py-5 text-sm last:border-0 sm:px-9"
-            >
-              <span className="font-semibold">{label}</span>
-              <span className="text-foreground">{ours}</span>
-              <span className="text-muted-foreground">{theirs}</span>
-            </div>
-          ))}
-        </Reveal>
       </div>
     </section>
   );
@@ -613,44 +640,6 @@ function RealitySprint() {
   );
 }
 
-function Inclusions() {
-  const items = [
-    ["Your files and data", "Full access to your own hosting account and site files."],
-    ["Self-hosted WordPress", "Install and manage WordPress yourself through cPanel."],
-    [
-      "One-click installs",
-      "Install WordPress and other supported applications without manual setup.",
-    ],
-    [
-      "NagaVision tools",
-      "Customers get access to upcoming NagaVision AI tools and web apps at no extra charge.",
-    ],
-  ];
-  return (
-    <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-8 sm:pb-32">
-      <Reveal>
-        <p className="text-xs font-semibold tracking-[0.24em] text-muted-foreground uppercase">
-          Included by design
-        </p>
-        <h2 className="mt-5 max-w-3xl text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.03] font-bold">
-          Simple hosting. <span className="text-spectrum">Full control.</span>
-        </h2>
-      </Reveal>
-      <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {items.map(([title, body], i) => (
-          <Reveal key={title} delay={i * 90}>
-            <article className="h-full rounded-[1.75rem] border border-border bg-card p-8">
-              <Check className="h-6 w-6 text-flame" />
-              <h3 className="mt-6 text-xl font-bold">{title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{body}</p>
-            </article>
-          </Reveal>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function Faq() {
   const faqs: [string, string][] = [
     [
@@ -747,10 +736,10 @@ function Footer() {
       <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-5 py-10 sm:px-8 md:flex-row md:items-center">
         <div className="flex items-center gap-2.5">
           <span className="bg-spectrum h-6 w-6 rounded-md" />
-          <span className="font-display font-bold">Naga Host Hosting</span>
+          <span className="font-display font-bold">NagaVision Hosting</span>
         </div>
         <p className="text-sm text-muted-foreground">
-          © {new Date().getFullYear()} Naga Host Hosting Ltd · Registered in England
+          © {new Date().getFullYear()} NagaVision LTD · Registered in England
         </p>
       </div>
     </footer>
@@ -764,12 +753,11 @@ function Landing() {
       <main>
         <Hero />
         <Benefits />
-        <Editorial />
-        <Pricing />
-        <Compare />
         <Handover />
+        <Pricing />
+        <HandbookBanner />
+        <Infrastructure />
         <RealitySprint />
-        <Inclusions />
         <Faq />
         <FinalCta />
       </main>
