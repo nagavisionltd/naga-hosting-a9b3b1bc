@@ -71,8 +71,24 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --radius: 1.25rem;
+  --background: oklch(0.995 0.004 90);
+  --foreground: oklch(0.18 0.02 275);
+  --ink: oklch(0.18 0.02 275);
+  --flame: oklch(0.66 0.2 32);
+  --flame-foreground: oklch(0.99 0.01 90);
+  --orchid: oklch(0.62 0.24 340);
+  --azure: oklch(0.6 0.19 258);
+  --sand: oklch(0.965 0.012 85);
+  --gradient-spectrum: linear-gradient(
+    100deg,
+    var(--flame) 0%,
+    var(--orchid) 48%,
+    var(--azure) 100%
+  );
+  --shadow-lift: 0 30px 70px -40px oklch(0.3 0.06 285 / 0.45);
+  --shadow-float: 0 50px 120px -60px oklch(0.4 0.15 320 / 0.5);
+
   --foreground: oklch(0.129 0.042 264.695);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
